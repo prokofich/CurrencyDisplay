@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_margin="5sp"
+        android:background="@drawable/background_item_cs_currency"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="USD"
+            android:id="@+id/id_item_tv_title"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintHeight_percent="0.8"
+            android:layout_marginStart="10sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:text="Фунт стерлингов Соединенного королевства"
+            android:layout_marginStart="10sp"
+            android:textStyle="italic"
+            android:textSize="18sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="10sp"
+            android:id="@+id/id_item_tv_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintBottom_toTopOf="@id/id_item_tv_price"
+            app:layout_constraintStart_toEndOf="@id/id_item_tv_title"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/background_item_tv_price"
+            android:gravity="start|center"
+            android:text="170 руб"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:id="@+id/id_item_tv_price"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/id_item_tv_name"
+            app:layout_constraintStart_toEndOf="@id/id_item_tv_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
