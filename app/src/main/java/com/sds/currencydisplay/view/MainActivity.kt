@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private var recyclerView: RecyclerView? = null
     private var currencyAdapter: CurrencyAdapter? = null
-    private var repository:Repository? = null
-    private var job:Job = Job()
+    private var repository: Repository? = null
+    private var job: Job = Job()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +34,13 @@ class MainActivity : AppCompatActivity() {
         repository = Repository()
 
         // проверка интернет соединения
-        if(repository?.checkInternet(this) == true){
+        if (repository?.checkInternet(this) == true) {
 
             val mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
             // корутина с отложенным стартом
-            job = CoroutineScope(Dispatchers.Main).launch(start = CoroutineStart.LAZY){
-                while(isActive){
+            job = CoroutineScope(Dispatchers.Main).launch(start = CoroutineStart.LAZY) {
+                while (isActive) {
                     mainViewModel.getCurrency() // вызов функции каждые 30 сек
                     isShowProgressBar(true) // показ загрузки
                     delay(30000)
@@ -53,16 +53,16 @@ class MainActivity : AppCompatActivity() {
 
             job.start() // запуск корутины
 
-            mainViewModel.currency.observe(this){ data ->
-                repository?.showToast(this,"новые данные получены")
+            mainViewModel.currency.observe(this) { data ->
+                repository?.showToast(this, "новые данные получены")
                 isShowProgressBar(false) // скрыть ProgressBar
                 isShowRecyclerView() // показать RecyclerView
-                showLastUploadTime(data.body()?.Date.toString()) // показать время
-                currencyAdapter?.setList(data.body()?.Valute?.values?.toList()) // отправить полученные данные для отображения
+                showLastUploadTime(data.body()?.date.toString()) // показать время
+                currencyAdapter?.setList(data.body()?.valute?.values?.toList()) // отправить полученные данные для отображения
             }
 
-        }else{
-            repository?.showToast(this,"нет интернет соединения")
+        } else {
+            repository?.showToast(this, "нет интернет соединения")
         }
 
     }
@@ -70,24 +70,24 @@ class MainActivity : AppCompatActivity() {
     // выход из приложения
     override fun onBackPressed() {
         super.onBackPressed()
-        if(job.isActive){
+        if (job.isActive) {
             job.cancel()
         }
         this.finishAffinity()
     }
 
     // функция показа или сокрытия загрузочной анимации
-    private fun isShowProgressBar(isShow:Boolean){
+    private fun isShowProgressBar(isShow: Boolean) {
         binding?.idPb?.isVisible = isShow
     }
 
     // функция показа списка
-    private fun isShowRecyclerView(){
+    private fun isShowRecyclerView() {
         binding?.idRvCurrency?.isVisible = true
     }
 
     // функция показа последнего времени загрузки данных
-    private fun showLastUploadTime(text:String){
+    private fun showLastUploadTime(text: String) {
         binding?.idTvLastUploadTime?.text = text
     }
 

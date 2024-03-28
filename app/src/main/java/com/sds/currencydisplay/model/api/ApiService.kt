@@ -8,6 +8,6 @@ interface ApiService {
 
     // асинхронная функция запроса получения валюты с сервера
     @GET("daily_json.js")
-    suspend fun getCurrency():Response<ModelCurrency>
+    suspend fun getCurrency(): Response<ModelCurrency>
 
 }

@@ -13,7 +13,7 @@ import retrofit2.Response
 class MainViewModel:ViewModel() {
 
     private val repository = Repository()
-    var currency: MutableLiveData<Response<ModelCurrency>> = MutableLiveData()
+    val currency: MutableLiveData<Response<ModelCurrency>> = MutableLiveData()
 
     fun getCurrency(){
         viewModelScope.launch(Dispatchers.IO) {

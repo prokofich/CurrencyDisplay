@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sds.currencydisplay.R
 import com.sds.currencydisplay.model.modelCurrency.ModelCurrencyItem
 
-class CurrencyAdapter: RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
+class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
 
     private var listCurrency = emptyList<ModelCurrencyItem>()
 
-    class CurrencyViewHolder(view: View):RecyclerView.ViewHolder(view)
+    class CurrencyViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_currency_for_rv,parent,false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_currency_for_rv, parent, false)
         return CurrencyViewHolder(view)
     }
 
@@ -31,14 +32,14 @@ class CurrencyAdapter: RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>(
         val textViewName = holder.itemView.findViewById<TextView>(R.id.id_item_tv_name)
         val textViewPrice = holder.itemView.findViewById<TextView>(R.id.id_item_tv_price)
 
-        textViewTitle.text = listCurrency[position].CharCode
-        textViewName.text = listCurrency[position].Name
-        textViewPrice.text = "${listCurrency[position].Value} руб"
+        textViewTitle.text = listCurrency[position].charCode
+        textViewName.text = listCurrency[position].name
+        textViewPrice.text = "${listCurrency[position].value} руб"
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(list:List<ModelCurrencyItem>?){
-        if(list!=null){
+    fun setList(list: List<ModelCurrencyItem>?) {
+        if (list != null) {
             listCurrency = list
             notifyDataSetChanged()
         }
