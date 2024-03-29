@@ -2,4 +2,6 @@
     <string name="app_name">Currency Display</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titleToast">новые данные получены</string>
+    <string name="titleToast2">нет интернет соединения</string>
 </resources>

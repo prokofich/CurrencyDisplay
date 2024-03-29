@@ -2,7 +2,6 @@ package com.sds.currencydisplay.model.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.sds.currencydisplay.R
 import com.sds.currencydisplay.databinding.ActivityMainBinding
 import com.sds.currencydisplay.model.adapter.CurrencyAdapter
 import com.sds.currencydisplay.model.repository.Repository
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             job.start() // запуск корутины
 
             mainViewModel.currency.observe(this) { data ->
-                repository?.showToast(this, "новые данные получены")
+                repository?.showToast(this, getString(R.string.titleToast))
                 isShowProgressBar(false) // скрыть ProgressBar
                 isShowRecyclerView() // показать RecyclerView
                 showLastUploadTime(data.body()?.date.toString()) // показать время
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         } else {
-            repository?.showToast(this, "нет интернет соединения")
+            repository?.showToast(this, getString(R.string.titleToast2))
         }
 
     }
