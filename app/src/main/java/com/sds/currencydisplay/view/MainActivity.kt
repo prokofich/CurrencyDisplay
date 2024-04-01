@@ -21,15 +21,15 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(),InterfaceForActivity {
+class MainActivity : AppCompatActivity(), InterfaceForActivity {
 
     private var binding: ActivityMainBinding? = null
     private var recyclerView: RecyclerView? = null
     private var currencyAdapter: CurrencyAdapter? = null
     private var repository: Repository? = null
     private var job: Job = Job()
-    private var internetBroadcast:InternetBroadcastReceiver? = null
-    private var mainViewModel:MainViewModel? = null
+    private var internetBroadcast: InternetBroadcastReceiver? = null
+    private var mainViewModel: MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,16 +96,16 @@ class MainActivity : AppCompatActivity(),InterfaceForActivity {
 
     // функция просмотра состояния сети
     override fun showChangeInternet(flag: Boolean) {
-        if(flag){
-            repository?.showToast(this,"интернет есть")
+        if (flag) {
+            repository?.showToast(this, "интернет есть")
             createJob()
-        }else{
+        } else {
             repository?.showToast(this, getString(R.string.titleToast2))
             job.cancel()
         }
     }
 
-    private fun createJob(){
+    private fun createJob() {
         job = lifecycleScope.launch(Dispatchers.Main) {
             while (isActive) {
                 mainViewModel?.getCurrency() // вызов функции каждые 30 сек

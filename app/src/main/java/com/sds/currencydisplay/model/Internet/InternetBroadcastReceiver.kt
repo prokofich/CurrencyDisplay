@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 
-class InternetBroadcastReceiver(private val interfaceForActivity:InterfaceForActivity): BroadcastReceiver() {
+class InternetBroadcastReceiver(private val interfaceForActivity: InterfaceForActivity) : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == ConnectivityManager.CONNECTIVITY_ACTION) {
             val isConnected = checkInternet(context)
