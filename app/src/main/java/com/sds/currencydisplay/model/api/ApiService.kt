@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    // асинхронная функция запроса получения валюты с сервера
+    /** асинхронная функция запроса получения валюты с сервера */
     @GET("daily_json.js")
     suspend fun getCurrency(): Response<ModelCurrency>
 

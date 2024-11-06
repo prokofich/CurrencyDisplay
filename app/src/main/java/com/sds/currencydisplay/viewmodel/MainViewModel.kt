@@ -1,7 +1,8 @@
 package com.sds.currencydisplay.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sds.currencydisplay.model.modelCurrency.ModelCurrency
 import com.sds.currencydisplay.model.repository.Repository
@@ -10,9 +11,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class MainViewModel:ViewModel() {
+class MainViewModel(application: Application): AndroidViewModel(application) {
 
-    private val repository = Repository()
+    private val repository = Repository(application)
     val currency: MutableLiveData<Response<ModelCurrency>> = MutableLiveData()
 
     fun getCurrency(){

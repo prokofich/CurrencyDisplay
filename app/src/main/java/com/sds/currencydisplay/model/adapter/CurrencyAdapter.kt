@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sds.currencydisplay.R
 import com.sds.currencydisplay.model.modelCurrency.ModelCurrencyItem
 
-class CurrencyAdapter : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
+class CurrencyAdapter: RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
 
     private var listCurrency = emptyList<ModelCurrencyItem>()
 

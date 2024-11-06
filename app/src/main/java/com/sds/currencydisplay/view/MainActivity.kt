@@ -23,7 +23,8 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), InterfaceForActivity {
 
-    private var binding: ActivityMainBinding? = null
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
     private var recyclerView: RecyclerView? = null
     private var currencyAdapter: CurrencyAdapter? = null
     private var repository: Repository? = null
@@ -33,22 +34,22 @@ class MainActivity : AppCompatActivity(), InterfaceForActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding?.root
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
         setContentView(view)
 
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         internetBroadcast = InternetBroadcastReceiver(this)
 
-        repository = Repository()
+        repository = Repository(this)
 
-        recyclerView = binding?.idRvCurrency
+        recyclerView = binding.idRvCurrency
         currencyAdapter = CurrencyAdapter()
         recyclerView?.adapter = currencyAdapter
 
         mainViewModel?.currency?.observe(this) { data ->
-            repository?.showToast(this, getString(R.string.titleToast))
+            repository?.showToast(getString(R.string.titleToast))
             isShowProgressBar(false) // скрыть ProgressBar
             isShowRecyclerView() // показать RecyclerView
             showLastUploadTime(data.body()?.date.toString()) // показать время
@@ -57,20 +58,20 @@ class MainActivity : AppCompatActivity(), InterfaceForActivity {
 
     }
 
-    // регистрация ресивера
+    /** регистрация ресивера */
     override fun onResume() {
         super.onResume()
         val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         registerReceiver(internetBroadcast, filter)
     }
 
-    // отвязка ресивера
+    /** отвязка ресивера */
     override fun onStop() {
         super.onStop()
         unregisterReceiver(internetBroadcast)
     }
 
-    // выход из приложения
+    /** выход из приложения */
     override fun onBackPressed() {
         super.onBackPressed()
         if (job.isActive) {
@@ -79,28 +80,28 @@ class MainActivity : AppCompatActivity(), InterfaceForActivity {
         this.finishAffinity()
     }
 
-    // функция показа или сокрытия загрузочной анимации
+    /** функция показа или сокрытия загрузочной анимации */
     private fun isShowProgressBar(isShow: Boolean) {
-        binding?.idPb?.isVisible = isShow
+        binding.idPb.isVisible = isShow
     }
 
-    // функция показа списка
+    /** функция показа списка */
     private fun isShowRecyclerView() {
-        binding?.idRvCurrency?.isVisible = true
+        binding.idRvCurrency.isVisible = true
     }
 
-    // функция показа последнего времени загрузки данных
+    /** функция показа последнего времени загрузки данных */
     private fun showLastUploadTime(text: String) {
-        binding?.idTvLastUploadTime?.text = text
+        binding.idTvLastUploadTime.text = text
     }
 
-    // функция просмотра состояния сети
+    /** функция просмотра состояния сети */
     override fun showChangeInternet(flag: Boolean) {
         if (flag) {
-            repository?.showToast(this, "интернет есть")
+            repository?.showToast("интернет есть")
             createJob()
         } else {
-            repository?.showToast(this, getString(R.string.titleToast2))
+            repository?.showToast(getString(R.string.titleToast2))
             job.cancel()
         }
     }
